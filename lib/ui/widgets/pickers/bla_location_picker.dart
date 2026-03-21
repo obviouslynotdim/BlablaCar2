@@ -9,9 +9,8 @@ import '../../theme/theme.dart';
 /// A  Location Picker is a view to pick a Location:
 ///
 class BlaLocationPicker extends StatefulWidget {
-  const BlaLocationPicker({super.key, required this.locationRepository,required this.initLocation});
+  const BlaLocationPicker({super.key, required this.initLocation});
 
-  final LocationRepository locationRepository;
   final Location? initLocation; // optional initial location
 
   @override
@@ -20,6 +19,7 @@ class BlaLocationPicker extends StatefulWidget {
 
 class _BlaLocationPickerState extends State<BlaLocationPicker> {
   String currentSearchText = "";
+  late LocationRepository locationRepository;
 
   void onTap(Location location) {
     Navigator.pop<Location>(context, location);
@@ -32,7 +32,7 @@ class _BlaLocationPickerState extends State<BlaLocationPicker> {
   @override
   void initState() {
     super.initState();
-
+    
     // Initilize the search bar if any initial location
     if (widget.initLocation != null) {
       setState(() {
@@ -48,10 +48,8 @@ class _BlaLocationPickerState extends State<BlaLocationPicker> {
   }
 
   List<Location> get filteredLocation {
-    if (currentSearchText.length < 2) {
-      return [];
-    }
-    return widget.locationRepository.getSearchLocations(currentSearchText); // return filter loc based on search
+    if (currentSearchText.isEmpty) return locationRepository.locations;
+    return locationRepository.getSearchLocations(currentSearchText);
   }
 
   @override
