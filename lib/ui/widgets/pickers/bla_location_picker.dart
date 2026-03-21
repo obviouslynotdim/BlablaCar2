@@ -1,7 +1,7 @@
 import 'package:blabla/data/repository/location/location_repository.dart';
 import 'package:blabla/ui/widgets/display/bla_divider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../../../model/ride/locations.dart';
 import '../../theme/theme.dart';
 
@@ -32,7 +32,7 @@ class _BlaLocationPickerState extends State<BlaLocationPicker> {
   @override
   void initState() {
     super.initState();
-    
+    locationRepository = context.read<LocationRepository>();
     // Initilize the search bar if any initial location
     if (widget.initLocation != null) {
       setState(() {

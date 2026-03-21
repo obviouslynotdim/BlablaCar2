@@ -22,7 +22,7 @@ class HomeContent extends StatelessWidget {
 
     await Navigator.of(
       context,
-    ).push(AnimationUtils.createBottomToTopRoute(RidesSelectionScreen()));
+    ).push(AnimationUtils.createBottomToTopRoute(const RidesSelectionScreen()));
   }
 
   @override
